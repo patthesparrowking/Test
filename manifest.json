@@ -1,0 +1,16 @@
+{
+  "name": "Herbarium Didacticae",
+  "short_name": "Herbarium",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0D301D",
+  "theme_color": "#0D301D",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

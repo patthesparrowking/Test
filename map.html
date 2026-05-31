@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+     
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+    <style>
+
+
+        #map {
+            height: 100%;
+            /* height: 100dvh; */
+            width: 100%;
+            /* border: 1px solid black; */
+            background: #ddd;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="app app-no-header">
+        <main class="collection-page" id="map">
+            <!-- <div id="map"></div> -->
+        </main>
+                <div id="bottomnav-root"></div>
+    </div>
+    
+
+
+    <script>
+
+        async function loadCollectionMap() {
+            const response = await fetch("data/specimens.json");
+            const data = await response.json();
+
+            renderCollectionMap(data.specimens)
+        }
+
+        function renderCollectionMap(specimens) {
+
+            const euBounds = [
+                [35, -10],
+                [71, 32]
+            ];
+
+            const map = L.map("map").setView([54, 15], 4);
+
+            
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+                
+            const bounds = [];
+
+
+            specimens.forEach(specimen => {
+                const lat = Number(specimen.latitude);
+                const lng = Number(specimen.longitude);
+
+                if (isNaN(lat) || isNaN(lng)) return;
+
+                const marker = L.marker([lat, lng]).addTo(map);
+
+                marker.bindPopup(`
+                <strong><em>${specimen.taxonLatin}</em></strong><br>
+                ${specimen.taxonGerman ?? ""}<br>
+                ${specimen.location ?? ""}<br>
+                ${specimen.date}
+                `);
+
+                bounds.push([lat, lng]);
+            });
+
+            
+            livingSpecimens.forEach(livingSpecimen => {
+                const lat = Number(livingSpecimen.latitude);
+                const lng = Number(livingSpecimen.longitude);
+
+                if (isNaN(lat) || isNaN(lng)) return;
+
+                const marker = L.marker([lat, lng]).addTo(map);
+
+                marker.bindPopup(`
+                <strong><em>${livingSpecimen.taxonLatin}</em></strong><br>
+                ${livingSpecimen.taxonGerman ?? ""}<br>
+                ${livingSpecimen.location ?? ""}<br>
+                ${livingSpecimen.date}
+                `);
+
+                bounds.push([lat, lng]);
+            });
+
+
+            if (bounds.length > 0) {
+                map.fitBounds(bounds, {
+                    padding: [50, 50],
+                    maxZoom: 12
+                });
+            }
+        }
+    
+
+        document.addEventListener("DOMContentLoaded", loadCollectionMap);
+    </script>
+
+        <script src="js/nav.js"></script>
+</body>
+</html>

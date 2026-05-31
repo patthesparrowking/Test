@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossar</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/glossary.css">
+    <link rel="stylesheet" href="css/nav.css">
+
+    <style>
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="app app-no-header">
+        <main class="collection-page">
+            <section class="page-head">
+                <a href="index.html" class="back-button">‹</a>
+                <div>
+                    <h1>Glossar</h1>
+                    <p>Mogelzettel für lateinische Präpositionen.</p>
+                </div>
+            </section>
+
+
+            <section class="search-row">
+                <label for="" class="search-box">
+                    <span>
+                        <svg width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                            <path d="M21.464,22.643C19.205,24.629 16.242,25.833 13,25.833C5.917,25.833 0.167,20.083 0.167,13C0.167,5.917 5.917,0.167 13,0.167C20.083,0.167 25.833,5.917 25.833,13C25.833,16.242 24.629,19.205 22.643,21.464L31.589,30.411C31.914,30.736 31.914,31.264 31.589,31.589C31.264,31.914 30.736,31.914 30.411,31.589L21.464,22.643ZM20.894,20.894C22.916,18.873 24.167,16.082 24.167,13C24.167,6.837 19.163,1.833 13,1.833C6.837,1.833 1.833,6.837 1.833,13C1.833,19.163 6.837,24.167 13,24.167C16.082,24.167 18.873,22.916 20.894,20.894Z"/>
+                        </svg>
+                    </span>
+                    <input type="search" name="" id="search" placeholder="Begriffe suchen ...">
+                </label>
+
+                <button class="filter-button">
+                    <span>
+                        <svg width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+                            <g transform="matrix(-1,0,0,1.14815,32,-4.74074)">
+                                <path d="M31.21,5.851C31.355,5.695 31.384,5.479 31.285,5.297C31.185,5.116 30.974,5 30.743,5C25.624,5 6.376,5 1.257,5C1.026,5 0.815,5.116 0.715,5.297C0.616,5.479 0.645,5.695 0.79,5.851C3.609,8.887 13,19 13,19L13,26C13,26 16.227,29.227 17.948,30.948C18.112,31.112 18.376,31.17 18.61,31.094C18.845,31.017 19,30.822 19,30.604C19,27.248 19,19 19,19C19,19 28.391,8.887 31.21,5.851Z" style="fill:none;stroke:black;stroke-width:1.55px;"/>
+                            </g>
+                        </svg>
+                    </span>
+                    Filter
+                    <span>&nbsp;▼</span>
+                </button>
+            </section>
+
+            <section>
+                <!-- <input id="search" type="text" placeholder="Begriff suchen"> -->
+
+                <div class="table-wrap">
+                    <table class="glossary-table">
+                        <thead>
+                            <tr>
+                                <th>Deutsch</th>
+                                <th>Latein</th>
+                                <th>Ablativ</th>
+                                <th>Genus</th>
+                                <th>Dekl.</th>
+                                <th>Bemerkung</th>
+                            </tr>
+                        </thead>
+                        <tbody id="glossary-body"></tbody>
+                    </table>
+                </div>
+
+            </section>
+
+            <section>
+                <h2>Begriffe</h2>
+                <div id="term-cards" class="glossary-grid"></div>
+            </section>
+
+            <section>
+                <h2>Präpositionen</h2>
+                <div id="preposition-cards" class="glossary-grid"></div>
+            </section>
+
+            <section class="glossary-table">
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <th>Latein</th>
+                            <th>Genus</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>a/ab</td>
+                                <td>Abl.</td>
+                            </tr>
+                            <tr>
+                                <td>ad</td>
+                                <td>Akk.</td>
+                            </tr>
+                            <tr>
+                                <td>cum</td>
+                                <td>Abl.</td>
+                            </tr>
+                            <tr>
+                                <td>de</td>
+                                <td>Abl.</td>
+                            </tr>
+                            <tr>
+                                <td>e/ex</td>
+                                <td>Abl.</td>
+                            </tr>
+                            <tr>
+                                <td>in (wo?)</td>
+                                <td>Abl.</td>
+                            </tr>
+                            <tr>
+                                <td>inter</td>
+                                <td>Akk.</td>
+                            </tr>
+                            <tr>
+                                <td>iuxta</td>
+                                <td>Akk.</td>
+                            </tr>
+                            <tr>
+                                <td>per</td>
+                                <td>Akk</td>
+                            </tr>
+                            <tr>
+                                <td>pro</td>
+                                <td>Abl.</td>
+                            </tr>
+                            <tr>
+                                <td>porpe</td>
+                                <td>Akk.</td>
+                            </tr>
+                            <tr>
+                                <td>sine</td>
+                                <td>Abl.</td>
+                            </tr>
+                            <tr>
+                                <td>sub (wo?)</td>
+                                <td>Abl.</td>
+                            </tr>
+                            <tr>
+                                <td>supra</td>
+                                <td>Akk.</td>
+                            </tr>
+                            <tr>
+                                <td>trans</td>
+                                <td>Akk.</td>
+                            </tr>
+                            <tr>
+                                <td>vicino a</td>
+                                <td>Abl.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="glossary-table">
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <th>Deutsch</th>
+                            <th>Latein</th>
+                            <th>Ablative</th>
+                            <th>Genus</th>
+                            <th>Declination</th>
+                            <th>Bemerkung</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Bundesland / Freistaat</td>
+                                <td>provincia</td>
+                                <td>in provinciā</td>
+                                <td>f</td>
+                                <td>a</td>
+                                <td>klassische Entsprechung für Provinz/Landesteil</td>
+                            </tr>
+                            <tr>
+                                <td>Regierungsbezirk / Planungsregion</td>
+                                <td>districtus</td>
+                                <td>in districtū</td>
+                                <td>m</td>
+                                <td>u</td>
+                                <td>modernes/neulateinisches Verwaltungswort</td>
+                            </tr>
+                            <tr>
+                                <td>Landkreis</td>
+                                <td>regio</td>
+                                <td>in regione</td>
+                                <td>f</td>
+                                <td>kons.</td>
+                                <td>Region, Verwaltungsbezirk</td>
+                            </tr>
+                            <tr>
+                                <td>kreisfreie Stadt / große Stadt</td>
+                                <td>urbs</td>
+                                <td>in urbe</td>
+                                <td>f</td>
+                                <td>gem.</td>
+                                <td>große bzw. bedeutende Stadt</td>
+                            </tr>
+                            <tr>
+                                <td>Gemeinde</td>
+                                <td>communitas</td>
+                                <td>in communitate</td>
+                                <td>f</td>
+                                <td>kons.</td>
+                                <td>moderne Entsprechung für politische Gemeinde</td>
+                            </tr>
+                            <tr>
+                                <td>kleine Stadt</td>
+                                <td>oppidum</td>
+                                <td>in oppidō</td>
+                                <td>n</td>
+                                <td>o</td>
+                                <td>kleinere Stadt</td>
+                            </tr>
+                            <tr>
+                                <td>Dorf</td>
+                                <td>vicus</td>
+                                <td>in vicō</td>
+                                <td>m</td>
+                                <td>o</td>
+                                <td>Dorf, Siedlung</td>
+                            </tr>
+                            <tr>
+                                <td>Weiler</td>
+                                <td>pagus</td>
+                                <td>in pagō</td>
+                                <td>m</td>
+                                <td>o</td>
+                                <td>kleiner ländlicher Ort</td>
+                            </tr>
+                            <tr>
+                                <td>sehr kleiner Weiler</td>
+                                <td>viculus</td>
+                                <td>in viculō</td>
+                                <td>m</td>
+                                <td>o</td>
+                                <td>„kleines Dorf“</td>
+                            </tr>
+                            <tr>
+                                <td>Wustung / Einöde</td>
+                                <td>villa solitaria</td>
+                                <td>in villā solitariā</td>
+                                <td>f</td>
+                                <td>a</td>
+                                <td>einzelnes Gehöft</td>
+                            </tr>
+                            <tr>
+                                <td>Wüstung</td>
+                                <td>vicus desertus</td>
+                                <td>in vicō desertō</td>
+                                <td>m</td>
+                                <td>o</td>
+                                <td>verlassenes Dorf</td>
+                            </tr>
+                            <tr>
+                                <td>Gemarkung</td>
+                                <td>territorium …-ense</td>
+                                <td>in territoriō …-ensī</td>
+                                <td>n</td>
+                                <td>o</td>
+                                <td>auf …-ischer Flur</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+            <div id="bottomnav-root"></div>
+    </div>
+
+    <script src="js/nav.js"></script>
+    <script src="js/glossary.js"></script>
+</body>
+</html>

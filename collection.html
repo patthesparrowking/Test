@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection Detail</title>
+
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/glossary.css">
+    <link rel="stylesheet" href="style.css">
+    
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+    <style>
+
+        .collection-tab-bar {
+            display: grid;
+            grid-template-columns: auto auto;
+        }
+
+        /* .tab-btn {
+            min-height: 2rem;
+            padding: 0.75rem;
+            border-radius:  0.4rem;
+            background: #F4ECE1;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+            border: none;
+        } */
+
+
+.collection-tab-bar {
+    width: 100%;
+    min-width: 200px;
+    margin-bottom: 1rem;
+    border-bottom: 4px solid #6b5b2477;;
+    overflow: hidden;
+    transition: border 250ms ease;
+    padding-left: 22px;
+}
+
+
+
+.tab-btn {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    /* letter-spacing: 0.1rem; */
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      line-height: 1rem;
+      height: 2.5rem;
+    padding: 0.5rem 0.75rem 0.5rem;
+    background: #F4ECE1;
+    margin-right: 23px;
+    z-index: 2;
+    position: relative;
+    cursor: pointer;
+    color: #777;
+    border: none;
+    text-transform: uppercase;
+    font-weight: 400;
+    border-radius: 8px 8px 0 0;
+    transition: all 250ms ease;
+}
+.tab-btn:before,
+.tab-btn:after {
+  display: block;
+  content: " ";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 22px;  
+    background: #F4ECE1;
+  transition: all 250ms ease;
+}
+.tab-btn:before {
+  right: -12px;
+  transform: skew(30deg, 0deg);
+  box-shadow: rgba(0,0,0,.1) 3px 2px 5px, inset rgba(255,255,255,.09) -1px 0;
+    border-radius: 0 8px 0 0;
+}
+.tab-btn:after {
+  left: -12px;
+  transform: skew(-30deg, 0deg);
+  box-shadow: rgba(0,0,0,.1) -3px 2px 5px, inset rgba(255,255,255,.09) 1px 0;
+    border-radius: 8px 0 0 0;
+}
+.tab-btn:hover,
+.tab-btn:hover:before,
+.tab-btn:hover:after {
+  background-color: #F4F7F9;
+  color: #444;
+}
+.tab-btn.active {
+  z-index: 3;
+}
+.tab-btn.active,
+.tab-btn.active:before,
+.tab-btn.active:after {
+  background: #eef4dc;
+  color: #333;
+}
+
+.list-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 0.8rem;
+    color: #18331F;
+}
+.list-toolbar strong {
+    margin-left: 1rem;
+    font-weight: 400;
+    color: #E1B24B;
+}
+
+.list-toolbar span svg {
+    width: 0.5rem;
+    max-height: 1rem;
+    fill: #a77a22;;
+}
+
+.list-toolbar button {
+    border: none;
+    background: transparent;
+    color: #a77a22;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.edit-button {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.edit-button span svg {
+    width: 1rem;
+    max-height: 1rem;
+    fill: #a77a22;;
+}
+
+
+
+        .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.stat-card {
+    min-height: 6rem;
+    padding: 0.75rem;
+    border-radius:  0.4rem;
+    background: #F4ECE1;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.stat-card span svg {
+    width: 20px;
+    max-height: 20px;
+    fill: #6b5a24;
+}
+
+.stat-card span {
+    color: #6b5a24;
+}
+
+.stat-card strong {
+    display: block;
+    margin-top: 0.5rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    color: #18331F;
+}
+
+.stat-card p {
+    font-size: 0.6rem;
+}
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            padding: 1rem;
+            border-radius: 1.25rem;
+            background: #f6f1e6;
+            border: 1px solid #d8d0bd;
+        }
+        .collection-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.95rem;
+            background: #fffdf7;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .collection-table thead {
+            background: #dfe8c8;
+        }
+
+        .collection-table th {
+            padding: 0.85rem 1rem;
+            text-align: left;
+            font-weight: 700;
+            color: #26351f;
+            border-bottom: 2px solid #b8c89a;
+            text-transform: capitalize;
+        }
+
+        .collection-table td {
+            padding: 0.8rem 1rem;
+            color: #2f2f2a;
+            border-bottom: 1px solid #e3dccb;
+            vertical-align: top;
+        }
+
+
+
+        .collection-table tbody tr:nth-child(even) {
+            background: #faf7ef;
+        }
+
+        .collection-table tbody tr:hover {
+            background: #eef4dc;
+        }
+
+        .collection-table td:nth-child(3) {
+            font-style: italic;
+            font-weight: 600;
+            color: #355c36;
+        }
+
+        .collection-table td:nth-child(4)
+        .collection-table td:nth-child(5) {
+            white-space: nowrap;
+        }
+
+        .collection-table td.notes {
+            max-width: 250px;
+            white-space: nowrap;
+            overflow:hidden;
+            text-overflow: ellipsis;
+        }
+
+        .plant-card {
+            display: grid;
+            grid-template-columns: 5.5rem 1fr auto;
+            gap: 0.9rem;
+            align-items: center;
+
+            padding: 0.75rem;
+            border-radius: 0.6rem;
+            background: #F4ECE1;
+            background: #FBF4EC;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+        }
+
+        .plant-card img {
+            width: 5.5rem;
+            height: 5.5rem;
+            object-fit: cover;
+            border: 1px solid rgba(0, 0, 0, 0.01);
+            border-radius: 0.5rem;
+            mix-blend-mode: multiply;
+            background-color: #EBE0CB;
+        }
+
+        .plant-info {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .plant-info h2 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.1rem;
+            color: #18331F;
+            font-weight: 500;
+            /* text-transform: capitalize; */
+        }
+
+        .plant-info p {
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .plant-info span {
+            color: #a77a22;
+            font-size: 0.8rem;
+        }
+
+        .plant-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.4rem;
+            color: #333;
+        }
+
+        .plant-meta .icon-small {
+            height: 10px;
+            width: 10px;
+        }
+
+        .more-button {
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 0.6rem;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            background: transparent;
+            color: #a77a22;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .more-button span svg {
+            width: 1rem;
+            height: 1rem;
+            fill: #a77a22;;
+        }
+
+
+.fab {
+    position: fixed;
+    right: 1.25rem;
+    bottom: calc(90px + env(safe-area-inset-bottom));
+
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    background: #064b2d;
+    color: #E1B24B;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.fab span {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.fab small {
+    font-size: 0.7rem;
+}
+
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 30, 20, 0.45);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: min(92vw, 520px);
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background: #fffdf7;
+  border: 1px solid #d8d0bd;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+}
+
+.close-btn {
+  float: right;
+  border: none;
+  background: transparent;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+ #specimen-map {
+    width: 100%;
+    height: 420px;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: inset 0 3px 12px rgba(0, 0, 0, 0.17);
+    margin-top: 1rem;
+ }
+
+/* .more-btn {
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #b8c89a;
+  background: #dfe8c8;
+  color: #26351f;
+  font-weight: 600;
+  cursor: pointer;
+} */
+
+    .hidden {
+        display: none;
+    }
+        @media (max-width: 750px) {
+            .table-wrap {
+                display: none;
+            }
+        }
+
+        @media (min-width:750px) {
+
+            .collection-card {
+                display: none;
+            }
+
+            #herbarium-cards {
+                display: none;
+            }
+
+            .tab-btn {
+                height: 3rem;
+                font-size: 1.5rem;
+                font-weight: 600;
+            }
+
+            .stat-card {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-end;
+                justify-content: center;
+                padding-bottom: 1rem;
+            }
+
+            .stat-card span svg {
+                width: 4rem;
+                max-height: 50px;
+            }
+            .stat-card strong {
+                font-size: 4rem;
+                line-height: 50px;
+                margin-left: 25px;
+                margin-right: 25px;
+            }
+
+            .stat-card p {
+                font-size: 1.5rem;
+            }
+        }
+
+        
+        .tab-btn span {
+            height: 1.5rem;
+            display: flex;
+
+            align-items: center;
+        }
+        .tab-icon {
+            height: 1.5rem;
+            width: 1.5rem;
+            stroke-width: 0.1 !important;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+    <div class="app app-no-header">
+        <main class="collection-page">
+
+            <section class="page-head">
+                <a href="index.html" class="back-button">‹</a>
+                <div>
+                    <h1>Sammlung</h1>
+                    <p>Verwalte deine Sammlung.</p>
+                </div>
+            </section>
+
+
+
+
+            <section class="search-row">
+                <label for="" class="search-box">
+                    <span>
+                        <svg width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                            <path d="M21.464,22.643C19.205,24.629 16.242,25.833 13,25.833C5.917,25.833 0.167,20.083 0.167,13C0.167,5.917 5.917,0.167 13,0.167C20.083,0.167 25.833,5.917 25.833,13C25.833,16.242 24.629,19.205 22.643,21.464L31.589,30.411C31.914,30.736 31.914,31.264 31.589,31.589C31.264,31.914 30.736,31.914 30.411,31.589L21.464,22.643ZM20.894,20.894C22.916,18.873 24.167,16.082 24.167,13C24.167,6.837 19.163,1.833 13,1.833C6.837,1.833 1.833,6.837 1.833,13C1.833,19.163 6.837,24.167 13,24.167C16.082,24.167 18.873,22.916 20.894,20.894Z"/>
+                        </svg>
+                    </span>
+                    <input type="search" name="" id="search" placeholder="Begriffe suchen ...">
+                </label>
+
+                <button class="filter-button">
+                    <span>
+                        <svg width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+                            <g transform="matrix(-1,0,0,1.14815,32,-4.74074)">
+                                <path d="M31.21,5.851C31.355,5.695 31.384,5.479 31.285,5.297C31.185,5.116 30.974,5 30.743,5C25.624,5 6.376,5 1.257,5C1.026,5 0.815,5.116 0.715,5.297C0.616,5.479 0.645,5.695 0.79,5.851C3.609,8.887 13,19 13,19L13,26C13,26 16.227,29.227 17.948,30.948C18.112,31.112 18.376,31.17 18.61,31.094C18.845,31.017 19,30.822 19,30.604C19,27.248 19,19 19,19C19,19 28.391,8.887 31.21,5.851Z" style="fill:none;stroke:black;stroke-width:1.55px;"/>
+                            </g>
+                        </svg>
+                    </span>
+                    Filter
+                    <span>&nbsp;▼</span>
+                </button>
+            </section>
+
+            <section class="stats-grid">
+                <article class="stat-card">
+                    <span>
+                        <svg class="card-image" width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                            <g transform="matrix(8.41945e-17,1.375,-1.375,8.41945e-17,45.875,-10.6238)">
+                                <path d="M20.966,28.912C21.168,29.17 21.386,29.417 21.62,29.652C23.143,31.175 25.209,32.03 27.363,32.03L28.817,32.03C29.152,32.03 29.423,32.302 29.423,32.636C29.423,32.971 29.152,33.242 28.817,33.242L27.363,33.242C24.887,33.242 22.513,32.259 20.763,30.509C20.3,30.045 19.89,29.538 19.538,28.997C15.11,28.88 12.09,25.233 12.09,20.759C12.09,14.455 7.726,10.818 7.726,10.818C7.726,10.818 28,7.182 28,20.759C28,24.898 24.943,28.328 20.966,28.912ZM20.22,27.773C23.885,27.535 26.788,24.484 26.788,20.759C26.788,15.986 23.912,13.653 20.491,12.548C16.889,11.385 12.705,11.5 10.193,11.728C11.575,13.534 13.302,16.619 13.302,20.759C13.302,24.302 15.498,27.269 18.846,27.727C18.313,26.537 18.029,25.238 18.029,23.909L18.029,19.688C18.029,19.353 18.301,19.082 18.635,19.082C18.97,19.082 19.242,19.353 19.242,19.688L19.242,23.909C19.242,25.271 19.583,26.597 20.22,27.773Z"/>
+                            </g>
+                        </svg>
+                    </span>
+                    <strong id="plant-count"></strong>
+                    <p>Pflanzen</p>
+                </article>
+
+                <article class="stat-card">
+                    <span>
+                        <svg width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                            <g transform="matrix(-1.01015,-1.01015,-0.67991,0.67991,46.128,22.2376)">
+                                <path d="M11,27.88L11,7.137C11,6.386 13.472,2.414 15.478,-0.685C16.138,-1.704 17.048,-2.28 18,-2.28C18.952,-2.28 19.862,-1.704 20.522,-0.685C22.528,2.414 25,6.386 25,7.137C25,7.137 25,27.88 25,27.88C25,29.602 24.059,31 22.9,31L13.1,31C11.941,31 11,29.602 11,27.88ZM23.833,27.88L23.833,8.266C23.833,7.775 23.717,7.3 23.504,6.924C22.737,5.577 20.984,2.529 19.681,0.516C19.241,-0.163 18.634,-0.547 18,-0.547C17.366,-0.547 16.759,-0.163 16.319,0.516C15.016,2.529 13.263,5.577 12.497,6.925C12.284,7.3 12.167,7.775 12.167,8.266C12.167,11.959 12.167,27.88 12.167,27.88C12.167,28.645 12.585,29.267 13.1,29.267L22.9,29.267C23.415,29.267 23.833,28.645 23.833,27.88ZM18,3.093C19.095,3.093 19.983,4.414 19.983,6.04C19.983,7.666 19.095,8.987 18,8.987C16.905,8.987 16.017,7.666 16.017,6.04C16.017,4.414 16.905,3.093 18,3.093ZM18,4.827C17.549,4.827 17.183,5.37 17.183,6.04C17.183,6.71 17.549,7.253 18,7.253C18.451,7.253 18.817,6.71 18.817,6.04C18.817,5.37 18.451,4.827 18,4.827Z"/>
+                            </g>
+                        </svg>
+                    </span>
+                    <strong id="family-count"></strong>
+                    <p>Familien</p>
+                </article>
+
+                <article class="stat-card">
+                    <span>
+                        <svg class="icon-small" width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                            <g transform="matrix(0.0691598,0,0,0.0691598,-1.70492,-1.42828)">
+                                <path d="M256,20.652C350.766,20.652 427.704,97.59 427.704,192.356C427.704,287.121 256,483.348 256,483.348C256,483.348 84.296,287.121 84.296,192.356C84.296,97.59 161.234,20.652 256,20.652ZM256,43.244C173.703,43.244 106.889,110.059 106.889,192.356C106.889,217.877 121.677,251.267 141.099,285.968C176.638,349.466 229.227,415.962 256,448.346C282.773,415.962 335.362,349.466 370.901,285.968C390.323,251.267 405.111,217.877 405.111,192.356C405.111,110.059 338.297,43.244 256,43.244ZM256,118.704C295.901,118.704 328.296,151.099 328.296,191C328.296,230.901 295.901,263.296 256,263.296C216.099,263.296 183.704,230.901 183.704,191C183.704,151.099 216.099,118.704 256,118.704ZM256,141.296C228.568,141.296 206.296,163.568 206.296,191C206.296,218.432 228.568,240.704 256,240.704C283.432,240.704 305.704,218.432 305.704,191C305.704,163.568 283.432,141.296 256,141.296Z"/>
+                            </g>
+                        </svg>
+                    </span>
+                    <strong id="location-count"></strong>
+                    <p>Fundorte</p>
+                </article>
+
+                <article class="stat-card">
+                    <span>
+                        <svg class="icon-small" width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                            <g transform="matrix(1.14286,0,0,1.03846,-2.28571,0.846154)">
+                                <path d="M24.268,4L27.637,4C28.941,4 30,5.165 30,6.6L30,27.4C30,28.835 28.941,30 27.637,30L4.363,30C3.059,30 2,28.835 2,27.4L2,6.6C2,5.165 3.059,4 4.363,4L7.732,4L7.732,1.037C7.732,0.594 8.059,0.235 8.462,0.235C8.864,0.235 9.191,0.594 9.191,1.037L9.191,4L22.809,4L22.809,1.037C22.809,0.594 23.136,0.235 23.538,0.235C23.941,0.235 24.268,0.594 24.268,1.037L24.268,4ZM28.542,9.938L28.542,6.6C28.542,6.051 28.137,5.605 27.637,5.605L24.268,5.605L24.268,6.963C24.268,7.406 23.941,7.765 23.538,7.765C23.136,7.765 22.809,7.406 22.809,6.963L22.809,5.605L9.191,5.605L9.191,6.963C9.191,7.406 8.864,7.765 8.462,7.765C8.059,7.765 7.732,7.406 7.732,6.963L7.732,5.605L4.363,5.605C3.863,5.605 3.458,6.051 3.458,6.6L3.458,9.938L28.542,9.938ZM3.458,11.543L3.458,27.4C3.458,27.949 3.863,28.395 4.363,28.395L27.637,28.395C28.137,28.395 28.542,27.949 28.542,27.4L28.542,11.543L3.458,11.543ZM10.268,23.545L10.268,24.772C10.268,25.216 9.941,25.575 9.538,25.575L7.385,25.575C6.982,25.575 6.655,25.216 6.655,24.772L6.655,23.545C6.655,23.102 6.982,22.743 7.385,22.743L9.538,22.743C9.941,22.743 10.268,23.102 10.268,23.545ZM25.345,16.434L25.345,17.619C25.345,18.062 25.018,18.422 24.615,18.422L22.462,18.422C22.059,18.422 21.732,18.062 21.732,17.619L21.732,16.434C21.732,15.991 22.059,15.631 22.462,15.631L24.615,15.631C25.018,15.631 25.345,15.991 25.345,16.434ZM25.345,23.545L25.345,24.772C25.345,25.216 25.018,25.575 24.615,25.575L22.462,25.575C22.059,25.575 21.732,25.216 21.732,24.772L21.732,23.545C21.732,23.102 22.059,22.743 22.462,22.743L24.615,22.743C25.018,22.743 25.345,23.102 25.345,23.545ZM17.806,23.545L17.806,24.772C17.806,25.216 17.48,25.575 17.077,25.575L14.923,25.575C14.52,25.575 14.194,25.216 14.194,24.772L14.194,23.545C14.194,23.102 14.52,22.743 14.923,22.743L17.077,22.743C17.48,22.743 17.806,23.102 17.806,23.545ZM10.268,16.434L10.268,17.661C10.268,18.105 9.941,18.464 9.538,18.464L7.385,18.464C6.982,18.464 6.655,18.105 6.655,17.661L6.655,16.434C6.655,15.991 6.982,15.631 7.385,15.631L9.538,15.631C9.941,15.631 10.268,15.991 10.268,16.434ZM17.806,16.434L17.806,17.661C17.806,18.105 17.48,18.464 17.077,18.464L14.923,18.464C14.52,18.464 14.194,18.105 14.194,17.661L14.194,16.434C14.194,15.991 14.52,15.631 14.923,15.631L17.077,15.631C17.48,15.631 17.806,15.991 17.806,16.434Z"/>
+                            </g>
+                        </svg>
+                    </span>
+                    <strong id="latest-date"></strong>
+                    <p>Letzte Sammlung</p>
+                </article>
+            </section>
+
+            <section class="list-toolbar">
+                <p>Sortieren nach:
+                    <strong>Datum (neueste zuerst)</strong>
+                    <span>
+                        <svg width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                            <g transform="matrix(1.42857,0,0,1.42857,-7.57143,-7.28571)">
+                                <path d="M26.598,11.578C26.831,11.356 27.2,11.365 27.422,11.598C27.644,11.831 27.635,12.2 27.402,12.422L16.902,22.422C16.677,22.637 16.323,22.637 16.098,22.422L5.598,12.422C5.365,12.2 5.356,11.831 5.578,11.598C5.8,11.365 6.169,11.356 6.402,11.578L16.5,21.194L26.598,11.578Z"/>
+                            </g>
+                        </svg>
+                    </span>
+                </p>
+                <button class="edit-button">Bearbeiten
+                    <span>
+                        <svg width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                            <path d="M31,30.167C31.46,30.167 31.833,30.54 31.833,31C31.833,31.46 31.46,31.833 31,31.833L12.888,31.833C12.428,31.833 12.054,31.46 12.054,31C12.054,30.54 12.428,30.167 12.888,30.167L31,30.167ZM30.773,9.432L26.992,13.213L18.787,5.008L22.567,1.227C23.959,-0.164 26.217,-0.164 27.608,1.227L30.773,4.392C32.164,5.783 32.164,8.041 30.773,9.432ZM25.592,14.613L11.081,29.124C10.955,29.25 10.798,29.34 10.627,29.385L1.436,31.784C1.093,31.873 0.728,31.774 0.477,31.523C0.226,31.272 0.127,30.907 0.216,30.563L2.615,21.373C2.66,21.201 2.75,21.045 2.876,20.919L17.387,6.408L25.592,14.613ZM11,26.848L23.235,14.613L17.387,8.765L5.152,21L11,26.848ZM4.096,22.301L2.116,29.884L9.699,27.904L4.096,22.301Z"/>
+                        </svg>
+                    </span>
+                </button>
+            </section>
+
+            <section>
+
+
+                <div class="collection-tab-bar">
+                    <button class="tab-btn active" onclick="openCollection('herbarium')">
+                        <span>
+                            <svg class="tab-icon"><use href="assets/icons/sprite.svg#icon-herbarium"></use></svg>
+                        </span>
+                        <span>Herbarium</span>
+                    </button>
+                    <button class="tab-btn" onclick="openCollection('living')">Lebendsammlung</button>
+                </div>
+
+                <div id="herbarium" class="collection">
+                    <div id="herbarium-cards" class="glossary-grid"></div>
+                                    <div class="table-wrap">
+                    <table class="collection-table">
+                        <thead>
+                            <tr>
+                                <th>id</th>	
+                                <th>barcode</th>	
+                                <th>taxonLatin</th>	
+                                <th>taxonGerman</th>
+                                <th>collector</th>	
+                                <th>collector&nbsp;#</th>	
+                                <th>date</th>	
+                                <th>latitude</th>	
+                                <th>longitude</th>	
+                                <th>altitude</th>	
+                                <th>country</th>	
+                                <th>location</th>	
+                                <th>habitat</th>	
+                                <th>annotation</th>	
+                                <th>origin</th>	
+                                <th>family</th>	
+                                <th>subfamily</th>	
+                                <th>genus</th>	
+                                <th>epithet</th>	
+                                <th>author</th>	
+                                <th>infraType</th>	
+                                <th>infraEpithet</th>	
+                                <th>infraAuthor</th>	
+                                <th>acceptedName</th>	
+                                <th>wild</th>	
+                                <th>herbSeliger</th>	
+                                <th>hortSeliger</th>	
+                                <th>schnaps</th>	
+                                <th>Silica(PED)</th>	
+                                <th>hort(PED)</th>	
+                                <th>herbUBT</th>	
+                                <th>protologue</th>
+                            </tr>
+                        </thead>
+                        <tbody id="collection-body"></tbody>
+                    </table>
+                </div>
+                </div>
+
+                <div id="living" class="collection" style="display: none;">
+                    <div id="living-cards" class="glossary-grid"></div>
+                </div>
+
+            </section>
+            <a href="label.html" class="fab">
+                <span>+</span>
+                <small>Hinzufügen</small>
+            </a>
+
+            <div id="specimen-modal" class="modal hidden">
+            <div class="modal-content">
+                <button id="close-modal" class="close-btn">×</button>
+                <div id="modal-body"></div>
+                    <div id="specimen-map"></div>
+            </div>
+            </div>
+        </main>
+        <div id="bottomnav-root"></div>
+    </div>
+    
+            <script src="js/nav.js"></script>
+            <script src="js/collectionDetail.js"></script>
+</body>
+</html>

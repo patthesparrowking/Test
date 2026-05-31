@@ -1,0 +1,82 @@
+[
+        {
+            "id": "classick",
+            "name": "Klassisches Herbarium",
+            "fields": [
+                "scientificName",
+                "commonName",
+                "family",
+                "collector",
+                "location",
+                "date"
+            ]
+        },
+        {
+            "id": "scientifick",
+            "name": "Wissenschaftliches Etikett",
+            "fields": [
+                "scientificName",
+                "author",
+                "family",
+                "habitat",
+                "coordinates",
+                "collector",
+                "colectionNumber",
+                "date"
+            ]
+        },
+                {
+            "id": "classic",
+            "name": "KLASSISCH",
+            "fields": [
+                {"label":"Gattung", "key": "genus"}, 
+                {"label":"Art", "key": "species"},
+                {"label":"Familie", "key": "family"},
+                {"label":"Standort", "key": "location"},
+                {"label":"Datum", "key": "date"},
+                {"label":"Sammler", "key": "collector"},
+                {"label":"Sammlungsnummer", "key": "collectorNumber"},
+                {"label":"Annotation", "key": "annotation"}
+            ]
+        },
+                {
+            "id": "scientific",
+            "name": "WISSENSCHAFTLICH",
+            "fields": [
+                {"label":"Gattung", "key": "genus"}, 
+                {"label":"Art", "key": "species"},
+                {"label":"Autor", "key": "speciesAuthor"},
+                {"label":"Familie", "key": "family"},
+                {"label":"Unterfamilie", "key": "subfamiliy"},
+                {"label":"Standort", "key": "location"},
+                {"label":"Koordinaten", "key": "location"},
+                {"label":"Habitat", "key": "habitat"},
+                {"label":"Höhe", "key": "altitude"},
+                {"label":"Annotation", "key": "annotation"},
+                {"label":"Sammler", "key": "collector"},
+                {"label":"Sammlungsnummer", "key": "collectorNumber"},
+                {"label":"Datum", "key": "date"},
+                {"label":"Bestimmer", "key": "determiner"}
+            ]
+        },
+        {
+            "id": "university",
+            "name": "Herbarium Didacticae",
+            "fields": [
+                {"label":"Gattung", "key": "genus"}, 
+                {"label":"Art", "key": "species"},
+                {"label":"Autor", "key": "speciesAuthor"},
+                {"label":"Unterart", "key": "subspecies"},
+                {"label":"Untart-Autor", "key": "subspeciesAuthor"},
+                {"label":"Familie", "key": "family"},
+                {"label":"Unterfamilie", "key": "subfamiliy"},
+                {"label":"Standort", "key": "location"},
+                {"label":"Habitat", "key": "habitat"},
+                {"label":"Annotation", "key": "annotation"},
+                {"label":"Sammler", "key": "collector"},
+                {"label":"Sammlungsnummer", "key": "collectorNumber"},
+                {"label":"Datum", "key": "date"},
+                {"label":"Bestimmer", "key": "determiner"}
+            ]
+        }
+    ]

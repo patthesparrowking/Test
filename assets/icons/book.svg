@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(4.74041,0,0,3.97582,-511.945,-7307.41)">
+        <path d="M155.397,1947.77C144.072,1943.9 128.127,1946.71 110,1950L110,1863C112.628,1862.34 115.455,1861.83 118.387,1861.48L118.387,1939.9C135.004,1936.3 149.436,1938.37 159.011,1943.93C157.234,1944.17 155.792,1945.73 155.397,1947.77ZM162,1943.9L162,1873L162,1873L162,1943.9L162,1943.9Z" style="fill:none;stroke:black;stroke-width:3.66px;"/>
+    </g>
+    <g transform="matrix(-4.74041,0,0,3.97582,1023.94,-7307.41)">
+        <path d="M159.011,1943.93C149.436,1938.37 135.005,1936.3 118.387,1939.9L118.387,1861.48C115.455,1861.83 112.628,1862.34 110,1863L110,1950C128.127,1946.71 144.072,1943.9 155.397,1947.77C155.792,1945.73 157.234,1944.17 159.011,1943.93Z" style="fill:none;stroke:black;stroke-width:3.66px;"/>
+    </g>
+    <g transform="matrix(3.97582,0,0,3.97582,-388.083,-7347.56)">
+        <path d="M162,1873L162,1956C150.786,1948.99 132,1946 110,1950L110,1863C127.898,1858.49 155,1861 162,1873Z" style="fill:none;stroke:black;stroke-width:4.02px;"/>
+    </g>
+    <g transform="matrix(-3.97582,0,0,3.97582,900.082,-7347.56)">
+        <path d="M162,1873L162,1956C150.786,1948.99 132,1946 110,1950L110,1863C127.898,1858.49 155,1861 162,1873Z" style="fill:none;stroke:black;stroke-width:4.02px;"/>
+    </g>
+    <g transform="matrix(3.97582,0,0,3.05832,-388.083,-5554.77)">
+        <path d="M165.564,1954.04C168.059,1954.4 170,1957.16 170,1960.5C170,1964.09 167.76,1967 165,1967L159,1967C156.24,1967 154,1964.09 154,1960.5C154,1957.16 155.941,1954.4 158.436,1954.04C159.696,1954.84 160.885,1955.69 162,1956.6C163.115,1955.69 164.304,1954.84 165.564,1954.04Z" style="fill:none;stroke:black;stroke-width:4.51px;stroke-linecap:butt;stroke-miterlimit:2;"/>
+    </g>
+</svg>

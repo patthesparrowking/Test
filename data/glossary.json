@@ -1,0 +1,124 @@
+{
+    "terms": [
+        {
+        "german": "Bundesland / Freistaat",
+        "latin": "provincia",
+        "ablative": "in provinciā",
+        "genus": "f",
+        "declination": "a",
+        "note": "klassische Entsprechung für Provinz/Landesteil"
+        },
+        {
+        "german": "Regierungsbezirk / Planungsregion",
+        "latin": "districtus",
+        "ablative": "in districtū",
+        "genus": "m",
+        "declination": "u",
+        "note": "modernes/neulateinisches Verwaltungswort"
+        },
+        {
+        "german": "Landkreis",
+        "latin": "regio",
+        "ablative": "in regione",
+        "genus": "f",
+        "declination": "kons.",
+        "note": "Region, Verwaltungsbezirk"
+        },
+        {
+        "german": "kreisfreie Stadt / große Stadt",
+        "latin": "urbs",
+        "ablative": "in urbe",
+        "genus": "f",
+        "declination": "gem.",
+        "note": "große bzw. bedeutende Stadt"
+        },
+        {
+        "german": "Gemeinde",
+        "latin": "communitas",
+        "ablative": "in communitate",
+        "genus": "f",
+        "declination": "kons.",
+        "note": "moderne Entsprechung für politische Gemeinde"
+        },
+        {
+        "german": "kleine Stadt",
+        "latin": "oppidum",
+        "ablative": "in oppidō",
+        "genus": "n",
+        "declination": "o",
+        "note": "kleinere Stadt"
+        },
+        {
+        "german": "Dorf",
+        "latin": "vicus",
+        "ablative": "in vicō",
+        "genus": "m",
+        "declination": "o",
+        "note": "Dorf, Siedlung"
+        },
+        {
+        "german": "Weiler",
+        "latin": "pagus",
+        "ablative": "in pagō",
+        "genus": "m",
+        "declination": "o",
+        "note": "kleiner ländlicher Ort"
+        },
+        {
+        "german": "sehr kleiner Weiler",
+        "latin": "viculus",
+        "ablative": "in viculō",
+        "genus": "m",
+        "declination": "o",
+        "note": "kleines Dorf"
+        },
+        {
+        "german": "Wustung / Einöde",
+        "latin": "villa solitaria",
+        "ablative": "in villā solitariā",
+        "genus": "f",
+        "declination": "a",
+        "note": "einzelnes Gehöft"
+        },
+        {
+        "german": "Wüstung",
+        "latin": "vicus desertus",
+        "ablative": "in vicō desertō",
+        "genus": "m",
+        "declination": "o",
+        "note": "verlassenes Dorf"
+        },
+        {
+        "german": "Gemarkung",
+        "latin": "territorium …-ense",
+        "ablative": "in territoriō …-ensī",
+        "genus": "n",
+        "declination": "o",
+        "note": "auf …-ischer Flur"
+        }
+
+    ],
+
+    "prepositions": [
+        {"latin": "a/ab" , "case":  "Abl."},
+        {"latin": "ad" , "case":  "Akk."},
+        {"latin": "cum" , "case":  "Abl."},
+        {"latin": "de" , "case":  "Abl."},
+        {"latin": "e/ex" , "case":  "Abl."},
+        {"latin": "in (wo?)" , "case":  "Abl."},
+        {"latin": "inter" , "case":  "Akk."},
+        {"latin": "iuxta" , "case":  "Akk."},
+        {"latin": "per" , "case":  "Akk."},
+        {"latin": "pro" , "case":  "Abl."},
+        {"latin": "prope" , "case":  "Akk."},
+        {"latin": "sine" , "case":  "Abl."},
+        {"latin": "sub (wo?)" , "case":  "Abl."},
+        {"latin": "supra" , "case":  "Akk."},
+        {"latin": "trans" , "case":  "Akk."},
+        {"latin": "vicino a" , "case":  "Abl."}
+
+    ]
+}
+
+
+

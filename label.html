@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Label Creation</title>
+
+        <link rel="stylesheet" href="css/nav.css">
+        <link rel="stylesheet" href="style.css">
+
+    <style>
+
+:root {
+    --label-width: 5.5rem;
+    --label-print-width: 18%;
+    --textarea-width: 36ch;
+}
+
+        .top-bar {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-button {
+            text-decoration: none;
+            font-size: 2.5rem;
+            line-height: 1;
+            color: #18331F;
+        }
+
+        .top-bar h1 {
+            font-family: "Times New Roman", serif;
+            font-size: 2.2rem;
+            color: #18331F;
+            font-weight: 400;
+        }
+
+        .top-bar p {
+            margin-top: .3rem;
+            color: #333;
+        }
+
+
+
+        .label-tab-bar {
+            display: grid;
+            grid-template-columns: auto auto;
+        }
+
+        /* .tab-btn {
+            min-height: 2rem;
+            padding: 0.75rem;
+            border-radius:  0.4rem;
+            background: #F4ECE1;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+            border: none;
+        } */
+
+
+.label-tab-bar {
+    width: 100%;
+    min-width: 200px;
+    margin-bottom: 1rem;
+    border-bottom: 4px solid #6b5b2477;;
+    overflow: hidden;
+    transition: border 250ms ease;
+    padding-left: 22px;
+}
+
+
+
+.tab-btn {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    letter-spacing: 0.1rem;
+      display: block;
+      height: 2.5rem;
+    padding: 10px 24px 8px;
+    background: #F4ECE1;
+    margin-right: 23px;
+    z-index: 2;
+    position: relative;
+    cursor: pointer;
+    color: #777;
+    border: none;
+    text-transform: uppercase;
+    font-weight: 400;
+    border-radius: 8px 8px 0 0;
+    transition: all 250ms ease;
+}
+.tab-btn:before,
+.tab-btn:after {
+  display: block;
+  content: " ";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 22px;  
+    background: #F4ECE1;
+  transition: all 250ms ease;
+}
+.tab-btn:before {
+  right: -12px;
+  transform: skew(30deg, 0deg);
+  box-shadow: rgba(0,0,0,.1) 3px 2px 5px, inset rgba(255,255,255,.09) -1px 0;
+    border-radius: 0 8px 0 0;
+}
+.tab-btn:after {
+  left: -12px;
+  transform: skew(-30deg, 0deg);
+  box-shadow: rgba(0,0,0,.1) -3px 2px 5px, inset rgba(255,255,255,.09) 1px 0;
+    border-radius: 8px 0 0 0;
+}
+.tab-btn:hover,
+.tab-btn:hover:before,
+.tab-btn:hover:after {
+  background-color: #F4F7F9;
+  color: #444;
+}
+.tab-btn.active {
+  z-index: 3;
+}
+.tab-btn.active,
+.tab-btn.active:before,
+.tab-btn.active:after {
+  background: #eef4dc;
+  color: #333;
+}
+
+
+
+        @media (max-width: 750px) {
+            .table-wrap {
+                display: none;
+            }
+        }
+
+        @media (min-width:750px) {
+
+            .collection-card {
+                display: none;
+            }
+
+            #herbarium-cards {
+                display: none;
+            }
+
+            .tab-btn {
+                height: 3rem;
+                font-size: 1.5rem;
+                font-weight: 600;
+            }
+        }
+
+
+
+
+
+
+            .label-form {
+            /* display: flex;
+            flex-direction: column;
+            gap: .8rem; */
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            }
+
+            .label-form h2 {
+            margin-top: .8rem;
+            margin-bottom: .2rem;
+            font-family: "Times New Roman", serif;
+            font-size: .9rem;
+            letter-spacing: .14rem;
+            text-transform: uppercase;
+            color: #18331F;
+            }
+
+            .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .8rem;
+            }
+
+            .form-card {
+            display: grid;
+            grid-template-columns: 2.5rem 1fr;
+            align-items: center;
+            gap: .75rem;
+
+            min-height: 4.3rem;
+            padding: .5rem;
+
+            border-radius: .8rem;
+            background: #F4ECE1;
+            box-shadow: 0 3px 12px rgba(0,0,0,.08);
+            }
+
+            .form-card-large {
+            align-items: flex-start;
+            }
+
+            .form-icon {
+            font-size: 1.7rem;
+            color: #6b5a24;
+            text-align: center;
+            }
+
+            .form-icon svg {
+                height: 1.7rem;
+                fill: #6b5a24;
+            }
+
+            .form-text {
+            display: flex;
+            flex-direction: column;
+            gap: .25rem;
+            }
+
+            .form-label {
+            font-weight: 600;
+            color: #18331F;
+            }
+
+            input,
+            textarea {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            font: inherit;
+            color: #333;
+            }
+
+            textarea {
+            min-height: 4.5rem;
+            resize: none;
+            }
+
+            input::placeholder,
+            textarea::placeholder {
+            color: rgba(0,0,0,.4);
+            }
+
+            .no-print-btn {
+            margin-top: 1rem;
+            min-height: 4rem;
+
+            border: none;
+            border-radius: .8rem;
+
+            background: #18331F;
+            color: #E1B24B;
+
+            font-family: "Times New Roman", serif;
+            font-size: 1.1rem;
+            letter-spacing: .12rem;
+            text-transform: uppercase;
+
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+            }
+
+            .no-print-btn span svg {
+                height: 1.5rem;
+                fill: #E1B24B;;
+            }
+
+            .longitude, .latitude, .altitude {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;    
+            }
+
+            .geodata {
+                width: 80%;
+            }
+
+            #genusInput, #speciesInput, #subSpeciesInput {
+                font-style: italic;
+            }
+
+            #speciesAuthorInput, #subSpeciesAuthor {
+                font-variant: small-caps;
+                text-transform: capitalize;
+            }
+
+                        .placeholder {
+                background: transparent;
+                box-shadow: none;
+            }
+
+        @media (max-width: 750px) {
+            .label-form {
+                display: flex;
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .placeholder {
+                display: none;
+            }
+        }
+
+
+
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 15mm 40mm 40mm 40mm;
+    }
+
+    body {
+        background: #fff;
+        color: #000;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 10pt;
+        line-height: 1.5;
+        margin: 0;
+        padding: 0;
+        overflow: visible;
+        min-height: auto;
+    }
+
+
+
+    .print-container,
+    .main-wrap {
+        box-shadow: none;
+    }
+
+    .no-print,
+    .no-print-btn,
+    .print-input
+    .bottom-nav {
+        display: none !important;
+    }
+
+    .print-text {
+        display: inline-block !important;
+        color: #222;
+        font-family: inherit;
+        text-align: left;
+        white-space: pre-wrap;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    .italic-print {
+        font-style: italic;
+    }
+
+    .small-caps-print {
+        font-variant: small-caps;
+    }
+
+    #locationPrint,
+    #habitatPrint,
+    #annotationPrint {
+        width: var(--textarea-width);
+        text-align: justify;
+    }
+
+    label {
+        width: var(--label-print-width);
+        min-width: var(--label-print-width);
+        margin-right: 10px;
+    }
+
+    #latitudePrint,
+    #longitudePrint,
+    #altitudePrint {
+        margin-left: 1ch;
+    }
+
+
+    .inline-label {
+        width: fit-content;
+        min-width: 0;
+        margin-right: 0;
+    }
+
+    .line {
+        margin-bottom: 0.2rem;
+    }
+
+    .family-line {margin-bottom: .5rem;}
+}
+
+
+    </style>
+</head>
+
+<body>
+    <div class="app app-no-header">
+        <main class="collection-page">
+
+            <div class="top-bar no-print">
+                <a href="index.html" class="back-button">‹</a>
+                <div>
+                    <h1>Neues Etikett</h1>
+                    <p>Erstelle ein neues Herbarium-Etikett.</p>
+                </div>
+            </div>
+
+            <div class="label-tab-bar no-print">
+                <button class="tab-btn active" onclick="openLabel('newLabel')">Neues Etikett</button>
+                <button class="tab-btn" onclick="openLabel('templates')">Etikett-Vorlagen</button>
+            </div>
+
+
+            <form class="label-form print-container">
+
+            <h2>Pflanzeninformationen</h2>
+
+<!-- Gattungsname -->
+            <label class="form-card">
+                <span class="form-icon">☘</span>
+                <span class="form-text">
+                    <span class="form-label">Gattungsname</span>
+                    <input type="text" id="genusInput" class="print-input" data-print-target="genusPrint" placeholder="Vincetoxicum">
+                    <span id="genusPrint" class="print-text italic-print"></span>
+                </span>
+            </label>
+
+<!-- Artephitet -->
+            <label class="form-card">
+                <span class="form-icon">✿</span>
+                <span class="form-text">
+                    <span class="form-label">Artepithet</span>
+                    <input type="text" id="speciesInput" class="print-input" data-print-target="speciesPrint" placeholder="hirundinaria">
+                    <span id="speciesPrint" class="print-text italic-print"></span>
+                </span>
+            </label>
+
+            <label class="form-card placeholder"></label>
+
+<!-- Autor (Art) -->
+            <label class="form-card">
+                <span class="form-icon">✣</span>
+                <span class="form-text">
+                    <span class="form-label">Autor</span>
+                    <input type="text" id="speciesAuthorInput" class="print-input" data-print-target="speciesAuthorPrint" placeholder="Medik.">
+                    <span id="speciesAuthorPrint" class="print-text small-caps-print"></span>
+                </span>
+            </label>
+
+<!-- Unterart -->
+            <label class="form-card">
+                <span class="form-icon">⌁</span>
+                <span class="form-text">
+                    <span class="form-label">subsp.</span>
+                    <input type="text" id="subSpeciesInput" class="print-input" data-print-target="subSpeciesPrint" placeholder="hirundinaria">
+                    <span id="subSpeciesPrint" class="print-text-italic-print"></span>
+                </span>
+            </label>
+
+<!-- Autor (Unterart) -->
+            <label class="form-card">
+            <span class="form-icon">✣</span>
+            <span class="form-text">
+                <span class="form-label">Autor (subsp.)</span>
+                <input type="text" id="subSpeciesAuthorInput" data-print-target="subSpeciesAuthorPrint" placeholder="Medik.">
+                <span id="subSpeciesAuthorPrint" class="print-text small-caps-print"></span>
+                <!-- <input type="checkbox" class="no-print desktop" id="subSpeciesCheck"> -->
+            </span>
+            </label>
+
+<!-- Familie -->
+            <label class="form-card">
+                <span class="form-icon">✣</span>
+                <span class="form-text">
+                    <span class="form-label">Familie</span>
+                    <input type="text" id="familyInput" class="print-input" data-print-target="familyPrint" placeholder="Apocynaceae">
+                    <span id="familyPrint" class="print-text"></span>
+                </span>
+            </label>
+
+<!-- Unterfamilie -->
+            <label class="form-card">
+                <span class="form-icon">✣</span>
+                <span class="form-text">
+                    <span class="form-label">Unterfamilie</span>
+                    <input type="text" id="subFamilyInput" class="print-input" data-print-target="subFamilyPrint" placeholder="Asclepiaoideae">
+                    <span id="subFamiliyPrint" class="print-text"></span>
+                </span>
+            </label>
+
+<!-- Fundort -->
+      <label class="form-card form-card-large">
+                <span class="form-icon">
+                    <svg class="icon-small" width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                        <g transform="matrix(0.0691598,0,0,0.0691598,-1.70492,-1.42828)">
+                            <path d="M256,20.652C350.766,20.652 427.704,97.59 427.704,192.356C427.704,287.121 256,483.348 256,483.348C256,483.348 84.296,287.121 84.296,192.356C84.296,97.59 161.234,20.652 256,20.652ZM256,43.244C173.703,43.244 106.889,110.059 106.889,192.356C106.889,217.877 121.677,251.267 141.099,285.968C176.638,349.466 229.227,415.962 256,448.346C282.773,415.962 335.362,349.466 370.901,285.968C390.323,251.267 405.111,217.877 405.111,192.356C405.111,110.059 338.297,43.244 256,43.244ZM256,118.704C295.901,118.704 328.296,151.099 328.296,191C328.296,230.901 295.901,263.296 256,263.296C216.099,263.296 183.704,230.901 183.704,191C183.704,151.099 216.099,118.704 256,118.704ZM256,141.296C228.568,141.296 206.296,163.568 206.296,191C206.296,218.432 228.568,240.704 256,240.704C283.432,240.704 305.704,218.432 305.704,191C305.704,163.568 283.432,141.296 256,141.296Z"/>
+                        </g>
+                    </svg>            
+                </span>
+                <span class="form-text">
+                    <span class="form-label">Fundort</span>
+                    <textarea id="locationInput" class="print-input" data-print-target="locationPrint" placeholder="Bayreuth"></textarea>
+                    <span id="locationPrint" class="print-text"></span>
+                </span>
+            </label>
+
+<!-- Längengrad -->
+      <label class="form-card">
+        <span class="form-icon">
+            <svg width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                <g transform="matrix(1.06667,0,0,1.06667,-1.06667,-1.06667)">
+                    <path d="M16,31C7.721,31 1,24.279 1,16C1,7.721 7.721,1 16,1C24.279,1 31,7.721 31,16C31,24.279 24.279,31 16,31ZM8.446,4.888C4.896,7.307 2.563,11.383 2.563,16C2.563,20.617 4.896,24.693 8.446,27.112C6.176,24.367 4.75,20.404 4.75,16C4.75,11.596 6.176,7.633 8.446,4.888ZM23.554,27.112C27.104,24.693 29.437,20.617 29.437,16C29.437,11.383 27.104,7.307 23.554,4.888C25.824,7.633 27.25,11.596 27.25,16C27.25,20.404 25.824,24.367 23.554,27.112ZM13.068,3.199C12.121,3.622 11.24,4.241 10.45,5.013C7.918,7.488 6.313,11.497 6.313,16C6.313,20.503 7.918,24.512 10.45,26.987C11.24,27.759 12.121,28.378 13.068,28.801C11.453,26.164 10.375,21.415 10.375,16C10.375,10.585 11.453,5.836 13.068,3.199ZM18.932,28.801C19.879,28.378 20.76,27.759 21.55,26.987C24.082,24.512 25.687,20.503 25.687,16C25.687,11.497 24.082,7.488 21.55,5.013C20.76,4.241 19.879,3.622 18.932,3.199C20.547,5.836 21.625,10.585 21.625,16C21.625,21.415 20.547,26.164 18.932,28.801ZM16,29.437C16.265,29.437 16.501,29.279 16.739,29.067C17.176,28.679 17.567,28.103 17.93,27.393C19.244,24.824 20.062,20.673 20.062,16C20.062,11.327 19.244,7.176 17.93,4.607C17.567,3.897 17.176,3.321 16.739,2.933C16.501,2.721 16.265,2.563 16,2.563C15.735,2.563 15.499,2.721 15.261,2.933C14.824,3.321 14.433,3.897 14.07,4.607C12.756,7.176 11.938,11.327 11.938,16C11.938,20.673 12.756,24.824 14.07,27.393C14.433,28.103 14.824,28.679 15.261,29.067C15.499,29.279 15.735,29.437 16,29.437Z"/>
+                </g>
+            </svg>
+        </span>
+        <span class="form-text">
+          <span class="form-label">Längengrad</span>
+          <div class="longitude">
+            <input type="number" id="longitudeInput" class="print-input geodata" data-print-target="longitudePrint" placeholder="51.852373">
+            <span id="longitudePrint" class="print-text"></span>
+            <p>° N</p>
+          </div>
+        </span>
+      </label>
+
+<!-- Breitengrad -->
+      <label class="form-card">
+        <span class="form-icon">
+            <svg width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                <g transform="matrix(6.53145e-17,-1.06667,1.06667,6.53145e-17,-1.06667,33.0667)">
+                    <path d="M16,31C7.721,31 1,24.279 1,16C1,7.721 7.721,1 16,1C24.279,1 31,7.721 31,16C31,24.279 24.279,31 16,31ZM8.446,4.888C4.896,7.307 2.563,11.383 2.563,16C2.563,20.617 4.896,24.693 8.446,27.112C6.176,24.367 4.75,20.404 4.75,16C4.75,11.596 6.176,7.633 8.446,4.888ZM23.554,27.112C27.104,24.693 29.437,20.617 29.437,16C29.437,11.383 27.104,7.307 23.554,4.888C25.824,7.633 27.25,11.596 27.25,16C27.25,20.404 25.824,24.367 23.554,27.112ZM13.068,3.199C12.121,3.622 11.24,4.241 10.45,5.013C7.918,7.488 6.313,11.497 6.313,16C6.313,20.503 7.918,24.512 10.45,26.987C11.24,27.759 12.121,28.378 13.068,28.801C11.453,26.164 10.375,21.415 10.375,16C10.375,10.585 11.453,5.836 13.068,3.199ZM18.932,28.801C19.879,28.378 20.76,27.759 21.55,26.987C24.082,24.512 25.687,20.503 25.687,16C25.687,11.497 24.082,7.488 21.55,5.013C20.76,4.241 19.879,3.622 18.932,3.199C20.547,5.836 21.625,10.585 21.625,16C21.625,21.415 20.547,26.164 18.932,28.801ZM16,29.437C16.265,29.437 16.501,29.279 16.739,29.067C17.176,28.679 17.567,28.103 17.93,27.393C19.244,24.824 20.062,20.673 20.062,16C20.062,11.327 19.244,7.176 17.93,4.607C17.567,3.897 17.176,3.321 16.739,2.933C16.501,2.721 16.265,2.563 16,2.563C15.735,2.563 15.499,2.721 15.261,2.933C14.824,3.321 14.433,3.897 14.07,4.607C12.756,7.176 11.938,11.327 11.938,16C11.938,20.673 12.756,24.824 14.07,27.393C14.433,28.103 14.824,28.679 15.261,29.067C15.499,29.279 15.735,29.437 16,29.437Z"/>
+                </g>
+            </svg>
+        </span>
+        <span class="form-text">
+          <span class="form-label">Breitengrad</span>
+          <div class="latitude">
+            <input type="number" id="latitudeInput" class="print-input geodata" data-print-target="latitudePrint" placeholder="12.128962">
+            <span id="latitudePrint" class="print-text"></span>
+            <p>° E</p>
+          </div>
+        </span>
+      </label>
+
+      <label class="form-card">
+        <span class="form-icon">
+            <svg width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                <path d="M28.167,7.012L27.589,7.589C27.264,7.914 26.736,7.914 26.411,7.589C26.086,7.264 26.086,6.736 26.411,6.411L28.411,4.411C28.568,4.254 28.778,4.167 29,4.167C29.222,4.167 29.432,4.254 29.589,4.411L31.589,6.411C31.914,6.736 31.914,7.264 31.589,7.589C31.264,7.914 30.736,7.914 30.411,7.589L29.833,7.012L29.833,24.988L30.411,24.411C30.736,24.086 31.264,24.086 31.589,24.411C31.914,24.736 31.914,25.264 31.589,25.589L29.589,27.589C29.432,27.746 29.222,27.833 29,27.833C28.778,27.833 28.568,27.746 28.411,27.589L26.411,25.589C26.086,25.264 26.086,24.736 26.411,24.411C26.736,24.086 27.264,24.086 27.589,24.411L28.167,24.988L28.167,7.012ZM18.17,14.633L24.614,26.519C24.753,26.777 24.747,27.089 24.598,27.341C24.448,27.594 24.177,27.749 23.884,27.75L1.003,27.833C0.714,27.834 0.445,27.685 0.292,27.439C0.139,27.194 0.125,26.886 0.255,26.627C0.255,26.627 6.59,13.957 6.593,13.951L11.255,4.627C11.394,4.349 11.676,4.172 11.986,4.167C12.297,4.162 12.585,4.33 12.733,4.603C12.733,4.603 18.168,14.629 18.17,14.633ZM7.466,15.932L2.351,26.162L22.484,26.088L16.936,15.854L12.445,15.835L10.693,18.462C10.542,18.689 10.29,18.828 10.017,18.833C9.744,18.839 9.486,18.711 9.326,18.49L7.466,15.932ZM16.031,14.184L12.03,6.804L8.305,14.253L9.97,16.542L11.307,14.538C11.462,14.305 11.724,14.165 12.004,14.167L16.031,14.184Z"/>
+            </svg>
+        </span>
+        <span class="form-text">
+          <span class="form-label">Höhe</span>
+          <div class="altitude">
+            <input type="number" id="altitudeInput" class="print-input geodata" data-print-target="altitudePrint" placeholder="1">
+            <span id="altitudePrint" class="print-text"></span>
+            <p> m üNN</p>
+          </div>
+        </span>
+      </label>
+
+      <label class="form-card form-card-large">
+        <span class="form-icon">
+            <svg width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                <path d="M16,0C24.831,0 32,7.169 32,16C32,24.831 24.831,32 16,32C7.169,32 0,24.831 0,16C0,7.169 7.169,0 16,0ZM16,1.667C8.089,1.667 1.667,8.089 1.667,16C1.667,23.911 8.089,30.333 16,30.333C23.911,30.333 30.333,23.911 30.333,16C30.333,8.089 23.911,1.667 16,1.667ZM11.736,11.209L23.736,7.209C24.036,7.11 24.366,7.188 24.589,7.411C24.812,7.634 24.89,7.964 24.791,8.264L20.791,20.264C20.708,20.512 20.512,20.708 20.264,20.791L8.264,24.791C7.964,24.89 7.634,24.812 7.411,24.589C7.188,24.366 7.11,24.036 7.209,23.736L11.209,11.736C11.292,11.488 11.488,11.292 11.736,11.209ZM12.659,12.659L9.318,22.682L19.341,19.341L22.682,9.318L12.659,12.659ZM16,14C17.104,14 18,14.896 18,16C18,17.104 17.104,18 16,18C14.896,18 14,17.104 14,16C14,14.896 14.896,14 16,14Z"/>
+            </svg>
+        </span>
+        <span class="form-text">
+          <span class="form-label">Habitat</span>
+          <textarea id="habitatInput" class="print-input" data-print-target="habitatPrint" placeholder="Wiese am Waldrand, sonnig, trocken"></textarea>
+            <span id="habitatPrint" class="print-text"></span>
+        </span>
+      </label>
+
+    <label class="form-card form-card-large">
+        <span class="form-icon">
+            <svg width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                <g transform="matrix(1.14286,0,0,1.14286,-2.28571,-2.28571)">
+                    <path d="M20.769,29.231C20.277,29.723 19.609,30 18.913,30C15.655,30 6.2,30 6.2,30C3.882,30 2,28.118 2,25.8L2,6.2C2,3.882 3.882,2 6.2,2L25.8,2C28.118,2 30,3.882 30,6.2L30,18.913C30,19.609 29.723,20.277 29.231,20.769C27.369,22.631 22.631,27.369 20.769,29.231ZM28.333,18L28.333,6.2C28.333,4.802 27.198,3.667 25.8,3.667L6.2,3.667C4.802,3.667 3.667,4.802 3.667,6.2L3.667,25.8C3.667,27.198 4.802,28.333 6.2,28.333L18,28.333L18,22.2C18,19.882 19.882,18 22.2,18L28.333,18ZM19.667,27.976L27.976,19.667L22.2,19.667C20.802,19.667 19.667,20.802 19.667,22.2L19.667,27.976Z"/>
+                </g>
+            </svg>
+        </span>
+        <span class="form-text">
+            <span class="form-label">Annotation</span>
+            <textarea id="annotationInput" class="print-input" data-print-target="annotationPrint"  placeholder="Krone weiß, kahl"></textarea>
+            <span id="annotationPrint" class="print-text"></span>
+        </span>
+      </label>
+
+      
+        <label class="form-card">
+            <span class="form-icon">○</span>
+            <span class="form-text">
+                <span class="form-label">Sammler</span>
+                <input type="text" id="collectorFirstNameInput" class="print-input" data-print-target="collectorFirstNamePrint" placeholder="L. Seliger">
+                <span id="collectorFirstNamePrint" class="print-text italic-print"></span>
+            </span>
+        </label>
+
+      <label class="form-card">
+            <span class="form-icon">#</span>
+            <span class="form-text">
+            <span class="form-label">Sammlungsnummer</span>
+            <input type="text"id="collectorLastNameInput" class="print-input" data-print-target="collectorLastNamePrint" placeholder="66">
+            <span id="collectorNumberPrint" class="print-text"></span>
+            </span>
+      </label>
+
+        <label class="form-card">
+            <span class="form-icon">◷</span>
+            <span class="form-text">
+            <span class="form-label">Datum</span>
+                <input type="date" id="dateInput" class="print-input" data-print-target="datePrint">
+                <span id="datePrint" class="print-text"></span>
+            </span>
+        </label>
+
+        <label class="form-card">
+            <span class="form-icon">○</span>
+            <span class="form-text">
+                <span class="form-label">Bestimmer:in:</span>
+                <input type="text" id="determinerFirstNameInput" class="print-input" data-print-target="determinerFirstNamePrint" placeholder="L. Seliger">
+                <span id="determinerFirstNamePrint" class="print-text italic-print"></span>    
+            </span>
+        </label>
+
+        <label class="form-card">
+            <span class="form-icon">○</span>
+            <span class="form-text">
+                <span class="form-label">Bestimmer:in:</span>
+                <input type="text" name="" id="determinerLastNameInput" class="print-input" data-print-target="determinerLastNamePrint" >
+                <span id="determinerFirstNamePrint" class="print-text italic-print"></span> 
+                <span id="determinerLastNamePrint" class="print-text italic-print"></span>   
+            </span>
+        </label>
+      <!-- </div> -->
+
+
+
+
+        </form>
+            <button class="no-print-btn" onclick="window.print()">
+                <span>
+                    <svg width="100%" height="100%" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                        <path d="M6.167,25.833L2,25.833C1.514,25.833 1.047,25.64 0.704,25.296C0.36,24.953 0.167,24.486 0.167,24L0.167,16C0.167,14.983 0.571,14.008 1.289,13.289C2.008,12.571 2.983,12.167 4,12.167L28,12.167C29.017,12.167 29.992,12.571 30.711,13.289C31.429,14.008 31.833,14.983 31.833,16L31.833,24C31.833,24.486 31.64,24.953 31.296,25.296C30.953,25.64 30.486,25.833 30,25.833L25.833,25.833L25.833,30C25.833,31.013 25.013,31.833 24,31.833L8,31.833C6.988,31.833 6.167,31.013 6.167,30L6.167,25.833ZM25.833,24.167L30,24.167C30.044,24.167 30.087,24.149 30.118,24.118C30.149,24.087 30.167,24.044 30.167,24L30.167,16C30.167,15.425 29.938,14.874 29.532,14.468C29.126,14.062 28.575,13.833 28,13.833L4,13.833C3.425,13.833 2.874,14.062 2.468,14.468C2.062,14.874 1.833,15.425 1.833,16L1.833,24C1.833,24.044 1.851,24.087 1.882,24.118C1.913,24.149 1.956,24.167 2,24.167L6.167,24.167L6.167,22C6.167,20.987 6.988,20.167 8,20.167L24,20.167C25.012,20.167 25.833,20.987 25.833,22L25.833,24.167ZM7.833,22L7.833,30C7.833,30.092 7.908,30.167 8,30.167L24,30.167C24.092,30.167 24.167,30.092 24.167,30L24.167,22C24.167,21.908 24.092,21.833 24,21.833L8,21.833C7.908,21.833 7.833,21.908 7.833,22ZM27,16C27.552,16 28,16.448 28,17C28,17.552 27.552,18 27,18C26.448,18 26,17.552 26,17C26,16.448 26.448,16 27,16ZM25.833,8C25.833,8.46 25.46,8.833 25,8.833C24.54,8.833 24.167,8.46 24.167,8L24.167,5.345L20.655,1.833L10,1.833C8.803,1.833 7.833,2.803 7.833,4L7.833,8C7.833,8.46 7.46,8.833 7,8.833C6.54,8.833 6.167,8.46 6.167,8L6.167,4C6.167,1.883 7.883,0.167 10,0.167L21,0.167C21.221,0.167 21.433,0.254 21.589,0.411L25.589,4.411C25.746,4.567 25.833,4.779 25.833,5L25.833,8Z"/>
+                    </svg>
+                </span>
+                Etikett erstellen
+            </button>
+
+        </main>
+
+        <div id="bottomnav-root"></div>
+
+    </div>
+
+    <script>
+
+        const texts = {
+            standard: {
+                // title: "Herbarium Didacticae",
+                titleTwo: "",
+                titleThree: "Didacticae",
+                locationlabel: "Fundort:",
+                geodataLabel: "",
+                habitatLabel: "Standort:",
+                annotationLabel: "Annotation:",
+                collectorLabel: "Sammler:",
+                determinerLabel: "Bestimmer:"
+            },
+
+            scientific: {
+                // title: "Herbarium SELIGER'sche Sammlungen",
+                titleTwo: "Seliger",
+                titleThree: "'sche Sammlungen",
+                locationlabel: "loc.",
+                geodataLabel: "",
+                habitatLabel: "hab.",
+                annotationLabel: "ann.",
+                collectorLabel: "leg.",
+                determinerLabel: "det."
+            }
+        };
+
+        // document.getElementById("versionToggle").addEventListener("change", function() {
+        //     const version = this.checked ? texts.scientific : texts.standard;
+
+
+        //     document.getElementById("titleTwo").textContent = version.titleTwo;
+        //     document.getElementById("titleThree").textContent = version.titleThree;
+
+        //     document.getElementById("locationLabel").textContent = version.locationlabel;
+        //     document.getElementById("habitatLabel").textContent = version.habitatLabel;
+        //     document.getElementById("annotationLabel").textContent = version.annotationLabel;
+        //     document.getElementById("collectorLabel").textContent = version.collectorLabel;
+        //     document.getElementById("determinerLabel").textContent = version.determinerLabel;
+        // });
+
+
+
+        window.onbeforeprint = function() {
+            copyInputValuesToPrintText();
+            hideEmptyPrintLines();
+            hideSubSpeciesIfUnchecked();
+        };
+
+        window.onafterprint = function () {
+            resetHiddenLines();
+        };
+
+        function copyInputValuesToPrintText() {
+            document.querySelectorAll(".print-input[data-print-target]").forEach(input => {
+                const targetID = input.dataset.printTarget;
+                const target = document.getElementById(targetID);
+
+                if (!target) return;
+
+                if (input.type === "date" && input.value) {
+                    target.textContent = formatDate(input.value);
+                } else {
+                    target.textContent = input.value.trim();
+                }
+            });
+        }
+
+        function hideEmptyPrintLines() {
+            document.querySelectorAll("[data-hide-if-empty]").forEach(line => {
+                const inputId = line.dataset.hideIfEmpty;
+                const input = document.getElementById(inputId);
+
+                if (!input) return;
+
+                line.style.display = input.value.trim() === "" ? "none" : "";
+            });
+        }
+
+        function hideSubSpeciesIfUnchecked() {
+            const checkbox = document.getElementById("subSpeciesCheck");
+            const line = document.querySelector(".subspecies-line");
+
+            if (!checkbox || !line) return;
+
+            line.style.display = checkbox.checked ? "" : "none";
+        };
+
+        function resetHiddenLines() {
+            document.querySelectorAll(".subspecies-line, .location-line, .habitat-line, .annotation-line").forEach(line => {
+                line.style.display = "";
+            });
+        }
+
+        function formatDate(value) {
+            const [year, month, day] = value.split("-");
+            return `${day}.${month}.${year}`;
+        }
+
+        function applyVersion(version) {
+
+            if (version === "scientific") {
+
+                document.documentElement.style.setProperty( "--label-width", "2rem");
+                document.documentElement.style.setProperty( "--label-print-width", "6%");
+                document.documentElement.style.setProperty( "--textarea-width", "44ch");
+
+            } else {
+                document.documentElement.style.setProperty("--label-width", "5.5rem");
+                document.documentElement.style.setProperty("--label-print-width", "18%");
+                document.documentElement.style.setProperty( "--textarea-width", "42ch");
+            }
+        }
+
+        // document
+        //     .getElementById("versionToggle")
+        //     .addEventListener("change", function () {
+
+        //         applyVersion(
+        //             this.checked
+        //                 ? "scientific"
+        //                 : "standard"
+        //         );
+
+        //     });
+    </script>
+
+    <script src="js/nav.js"></script>
+</body>
+</html>

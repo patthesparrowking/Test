@@ -1,0 +1,29 @@
+.label-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.herbarium-label {
+  padding: 1rem;
+  border: 1px solid #222;
+  background: white;
+  color: #111;
+  aspect-ratio: 3 / 2;
+  border-radius: 0.8rem;
+}
+
+.label-row {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem;
+  margin-block: 0.5rem;
+}
+
+.label-caption {
+  font-weight: 600;
+}
+
+.label-line {
+  border-bottom: 1px solid #333;
+}

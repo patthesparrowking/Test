@@ -19,7 +19,7 @@ body {
 
 .app {
     height: 100vh;
-    min-height: 100dvh;
+    min-height: calc(100dvh - 90px);
     display: grid;
     grid-template-rows: auto minmax(0, 1fr) auto;
     overflow: hidden;

@@ -23,7 +23,6 @@ body {
     display: grid;
     grid-template-rows: auto minmax(0, 1fr) auto;
     overflow: hidden;
-        padding-bottom: 90px;
 }
 
 .app-no-header {
@@ -33,7 +32,6 @@ body {
     grid-template-rows: minmax(0, 1fr) auto;
     overflow: hidden;
     background: hsl(38, 50%, 88%);
-        padding-bottom: 90px;
 }
 
 
@@ -44,7 +42,7 @@ body {
     flex-direction: column;
     gap: clamp(0.5rem, 2dvh, 1rem);
     padding: clamp(0.75rem, 3vw, 1.25rem);
-
+    padding-bottom: 90px;
 }
 
 .form-page, .collection-page, .template-page {

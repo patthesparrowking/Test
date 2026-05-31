@@ -18,16 +18,15 @@ body {
 }
 
 .app {
-    height: 100vh;
-    height: 100dvh;
+    /* height: 100vh; */
+    min-height: 100dvh;
     display: grid;
     grid-template-rows: auto minmax(0, 1fr) auto;
     overflow: hidden;
 }
 
 .app-no-header {
-    height: 100vh;
-    height: 100dvh;
+    min-height: 100dvh;
     display: grid;
     grid-template-rows: minmax(0, 1fr) auto;
     overflow: hidden;
@@ -42,6 +41,7 @@ body {
     flex-direction: column;
     gap: clamp(0.5rem, 2dvh, 1rem);
     padding: clamp(0.75rem, 3vw, 1.25rem);
+    padding-bottom: 90px;
 }
 
 .form-page, .collection-page, .template-page {

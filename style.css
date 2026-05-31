@@ -18,21 +18,20 @@ body {
 }
 
 .app {
-    /* height: 100vh; */
-    min-height: 100dvh;
+    height: 100vh;
+    height: 100dvh;
     display: grid;
     grid-template-rows: auto minmax(0, 1fr) auto;
     overflow: hidden;
-    margin-bottom: 90px;
 }
 
 .app-no-header {
+    height: 100vh;
     height: 100dvh;
     display: grid;
     grid-template-rows: minmax(0, 1fr) auto;
     overflow: hidden;
     background: hsl(38, 50%, 88%);
-        margin-bottom: 90px;
 }
 
 
@@ -43,7 +42,6 @@ body {
     flex-direction: column;
     gap: clamp(0.5rem, 2dvh, 1rem);
     padding: clamp(0.75rem, 3vw, 1.25rem);
-
 }
 
 .form-page, .collection-page, .template-page {

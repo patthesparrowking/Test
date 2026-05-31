@@ -1,5 +1,10 @@
 .bottom-nav {
 
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 9999;
+
     min-height: 72px;
     padding-top: 0.45rem;
     padding-bottom: max(0.75rem, env(safe-area-inset-bottom));

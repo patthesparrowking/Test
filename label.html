@@ -285,7 +285,7 @@
                 font-style: italic;
             }
 
-            #speciesAuthorInput, #subSpeciesAuthor {
+            #speciesAuthorInput, #subSpeciesAuthorInput {
                 font-variant: small-caps;
                 text-transform: capitalize;
             }
@@ -425,7 +425,7 @@
                 <span class="form-icon">☘</span>
                 <span class="form-text">
                     <span class="form-label">Gattungsname</span>
-                    <input type="text" id="genusInput" class="print-input" data-print-target="genusPrint" placeholder="Vincetoxicum">
+                    <input type="text" id="genusInput" class="print-input" data-print-target="genusPrint" placeholder="Gattungsname">
                     <span id="genusPrint" class="print-text italic-print"></span>
                 </span>
             </label>
@@ -435,7 +435,7 @@
                 <span class="form-icon">✿</span>
                 <span class="form-text">
                     <span class="form-label">Artepithet</span>
-                    <input type="text" id="speciesInput" class="print-input" data-print-target="speciesPrint" placeholder="hirundinaria">
+                    <input type="text" id="speciesInput" class="print-input" data-print-target="speciesPrint" placeholder="Artepithet">
                     <span id="speciesPrint" class="print-text italic-print"></span>
                 </span>
             </label>
@@ -447,7 +447,7 @@
                 <span class="form-icon">✣</span>
                 <span class="form-text">
                     <span class="form-label">Autor</span>
-                    <input type="text" id="speciesAuthorInput" class="print-input" data-print-target="speciesAuthorPrint" placeholder="Medik.">
+                    <input type="text" id="speciesAuthorInput" class="print-input" data-print-target="speciesAuthorPrint" placeholder="Autor">
                     <span id="speciesAuthorPrint" class="print-text small-caps-print"></span>
                 </span>
             </label>
@@ -457,7 +457,7 @@
                 <span class="form-icon">⌁</span>
                 <span class="form-text">
                     <span class="form-label">subsp.</span>
-                    <input type="text" id="subSpeciesInput" class="print-input" data-print-target="subSpeciesPrint" placeholder="hirundinaria">
+                    <input type="text" id="subSpeciesInput" class="print-input" data-print-target="subSpeciesPrint" placeholder="Unterfamilie">
                     <span id="subSpeciesPrint" class="print-text-italic-print"></span>
                 </span>
             </label>
@@ -467,7 +467,7 @@
             <span class="form-icon">✣</span>
             <span class="form-text">
                 <span class="form-label">Autor (subsp.)</span>
-                <input type="text" id="subSpeciesAuthorInput" data-print-target="subSpeciesAuthorPrint" placeholder="Medik.">
+                <input type="text" id="subSpeciesAuthorInput" data-print-target="subSpeciesAuthorPrint" placeholder="Autor">
                 <span id="subSpeciesAuthorPrint" class="print-text small-caps-print"></span>
                 <!-- <input type="checkbox" class="no-print desktop" id="subSpeciesCheck"> -->
             </span>
@@ -504,7 +504,7 @@
                 </span>
                 <span class="form-text">
                     <span class="form-label">Fundort</span>
-                    <textarea id="locationInput" class="print-input" data-print-target="locationPrint" placeholder="Bayreuth"></textarea>
+                    <textarea id="locationInput" class="print-input" data-print-target="locationPrint" placeholder="Fundort"></textarea>
                     <span id="locationPrint" class="print-text"></span>
                 </span>
             </label>
@@ -521,7 +521,7 @@
         <span class="form-text">
           <span class="form-label">Längengrad</span>
           <div class="longitude">
-            <input type="number" id="longitudeInput" class="print-input geodata" data-print-target="longitudePrint" placeholder="51.852373">
+            <input type="number" id="longitudeInput" class="print-input geodata" data-print-target="longitudePrint" placeholder="00.000000">
             <span id="longitudePrint" class="print-text"></span>
             <p>° N</p>
           </div>
@@ -540,7 +540,7 @@
         <span class="form-text">
           <span class="form-label">Breitengrad</span>
           <div class="latitude">
-            <input type="number" id="latitudeInput" class="print-input geodata" data-print-target="latitudePrint" placeholder="12.128962">
+            <input type="number" id="latitudeInput" class="print-input geodata" data-print-target="latitudePrint" placeholder="00.000000">
             <span id="latitudePrint" class="print-text"></span>
             <p>° E</p>
           </div>
@@ -556,7 +556,7 @@
         <span class="form-text">
           <span class="form-label">Höhe</span>
           <div class="altitude">
-            <input type="number" id="altitudeInput" class="print-input geodata" data-print-target="altitudePrint" placeholder="1">
+            <input type="number" id="altitudeInput" class="print-input geodata" data-print-target="altitudePrint" placeholder="000">
             <span id="altitudePrint" class="print-text"></span>
             <p> m üNN</p>
           </div>
@@ -571,7 +571,7 @@
         </span>
         <span class="form-text">
           <span class="form-label">Habitat</span>
-          <textarea id="habitatInput" class="print-input" data-print-target="habitatPrint" placeholder="Wiese am Waldrand, sonnig, trocken"></textarea>
+          <textarea id="habitatInput" class="print-input" data-print-target="habitatPrint" placeholder="Beschreibung des Habitats"></textarea>
             <span id="habitatPrint" class="print-text"></span>
         </span>
       </label>
@@ -586,7 +586,7 @@
         </span>
         <span class="form-text">
             <span class="form-label">Annotation</span>
-            <textarea id="annotationInput" class="print-input" data-print-target="annotationPrint"  placeholder="Krone weiß, kahl"></textarea>
+            <textarea id="annotationInput" class="print-input" data-print-target="annotationPrint"  placeholder="Zusätzliche Notizen"></textarea>
             <span id="annotationPrint" class="print-text"></span>
         </span>
       </label>
@@ -605,7 +605,7 @@
             <span class="form-icon">#</span>
             <span class="form-text">
             <span class="form-label">Sammlungsnummer</span>
-            <input type="text"id="collectorLastNameInput" class="print-input" data-print-target="collectorLastNamePrint" placeholder="66">
+            <input type="text"id="collectorLastNameInput" class="print-input" data-print-target="collectorLastNamePrint" placeholder="00">
             <span id="collectorNumberPrint" class="print-text"></span>
             </span>
       </label>
@@ -625,16 +625,6 @@
                 <span class="form-label">Bestimmer:in:</span>
                 <input type="text" id="determinerFirstNameInput" class="print-input" data-print-target="determinerFirstNamePrint" placeholder="M.Mustermann">
                 <span id="determinerFirstNamePrint" class="print-text italic-print"></span>    
-            </span>
-        </label>
-
-        <label class="form-card">
-            <span class="form-icon">○</span>
-            <span class="form-text">
-                <span class="form-label">Bestimmer:in:</span>
-                <input type="text" name="" id="determinerLastNameInput" class="print-input" data-print-target="determinerLastNamePrint" >
-                <span id="determinerFirstNamePrint" class="print-text italic-print"></span> 
-                <span id="determinerLastNamePrint" class="print-text italic-print"></span>   
             </span>
         </label>
       <!-- </div> -->
